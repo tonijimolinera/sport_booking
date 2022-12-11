@@ -38,6 +38,7 @@ public class SportComplexController {
 
     @PutMapping(path = "/setSportComplex")
     public SportComplexDTO setSportComplexDTO(@RequestBody SportComplexDTO sportComplexDTO){
+        // test initial v2 git
         return sportComplexService.setSportComplexDto(sportComplexDTO);
     }
 

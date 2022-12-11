@@ -4,14 +4,15 @@ import com.example.sport_booking.DAOs.SportComplexDAO;
 import com.example.sport_booking.DTOs.SportComplexDTO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
+/*
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-10T14:01:07+0100",
+    date = "2022-12-11T13:06:48+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 17.0.5 (Oracle Corporation)"
 )
+*/
 @Component
 public class SportComplexMapperImpl implements SportComplexMapper {
 
