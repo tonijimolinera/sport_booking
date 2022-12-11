@@ -4,10 +4,12 @@ import com.example.sport_booking.DAOs.SportComplexDAO;
 import com.example.sport_booking.DTOs.SportComplexDTO;
 import com.example.sport_booking.service.SportComplexService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.sport_booking.DTOs.SportComplexDTO.*;
 
@@ -38,8 +40,31 @@ public class SportComplexController {
 
     @PutMapping(path = "/setSportComplex")
     public SportComplexDTO setSportComplexDTO(@RequestBody SportComplexDTO sportComplexDTO){
-        // test initial v2 git
+        // branch in work
         return sportComplexService.setSportComplexDto(sportComplexDTO);
+    }
+
+    @PutMapping(path = "/setSportComplexMap")
+    public SportComplexDTO setSportComplexDTO(@RequestBody Map<String, String> body){
+        // branch in work
+        return sportComplexService.setSportComplexDtoMap(body);
+    }
+
+    @PutMapping(path = "/setSportComplexByName")
+    public List<SportComplexDTO> setSportComplexDTOById(@RequestParam ("name") String name, @RequestParam ("street") String street){
+
+        return sportComplexService.setSportComplexDtoByName(name, street);
+    }
+
+    @DeleteMapping(path = "/deleteSporComplexById")
+    public SportComplexDTO deleteSportComplexById(@RequestParam ("id") Integer id){
+        return sportComplexService.deleteSportComplexById(id);
+    }
+
+
+    @PostMapping(path = "/insertSportComplex")
+    public SportComplexDTO insertSportComplex(@RequestBody SportComplexDTO sportComplexDTO){
+        return sportComplexService.insertSportComplex(sportComplexDTO);
     }
 
 }
