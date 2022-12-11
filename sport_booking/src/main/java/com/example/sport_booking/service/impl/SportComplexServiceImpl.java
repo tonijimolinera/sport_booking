@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SportComplexServiceImpl implements SportComplexService {
@@ -42,6 +43,41 @@ public class SportComplexServiceImpl implements SportComplexService {
 
         SportComplexDAO sportComplexDAO = sportComplexMapper.toSportComplexDao(sportComplexDTO);
         sportComplexRepository.save(sportComplexDAO);
+        return sportComplexDTO;
+    }
+
+    @Override
+    public SportComplexDTO setSportComplexDtoMap(Map<String, String> body) {
+
+        SportComplexDAO sportComplexDAO = sportComplexRepository.findById(Integer.parseInt(body.get("id"))).get();
+        sportComplexDAO.setNameSportComplex(body.get("name"));
+        sportComplexDAO.setStreet(body.get("street"));
+        sportComplexDAO.setNumberAdreess(Integer.parseInt(body.get("number")));
+        sportComplexRepository.save(sportComplexDAO);
+        return sportComplexMapper.toSportComplexDto(sportComplexDAO);
+    }
+
+    @Override
+    public List<SportComplexDTO> setSportComplexDtoByName(String name, String street) {
+
+        List<SportComplexDAO> listSportName = sportComplexRepository.getSportComplexDAOByNameSportComplex(name);
+        for (SportComplexDAO misDaos : listSportName){
+            misDaos.setStreet(street);
+            sportComplexRepository.save(misDaos);
+        }
+        return sportComplexMapper.toSportComplexDtoList(listSportName);
+    }
+    @Override
+    public SportComplexDTO deleteSportComplexById(Integer id) {
+
+        SportComplexDAO deletedLine = sportComplexRepository.findById(id).get();
+        sportComplexRepository.delete(deletedLine);
+        return sportComplexMapper.toSportComplexDto(deletedLine);
+    }
+
+    @Override
+    public SportComplexDTO insertSportComplex(SportComplexDTO sportComplexDTO) {
+        sportComplexRepository.save(sportComplexMapper.toSportComplexDao(sportComplexDTO));
         return sportComplexDTO;
     }
 }
