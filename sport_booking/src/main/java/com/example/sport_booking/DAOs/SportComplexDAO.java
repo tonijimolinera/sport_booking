@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "tbl_sport_complex")
@@ -25,6 +26,7 @@ public class SportComplexDAO {
     private String street;
 
     @Column(name = "number_address")
+    @NonNull
     private Integer numberAdreess;
 
     public SportComplexDAO(){}

@@ -5,7 +5,9 @@ import com.example.sport_booking.DTOs.SportComplexDTO;
 import com.example.sport_booking.mappers.SportComplexMapper;
 import com.example.sport_booking.repositories.SportComplexRepository;
 import com.example.sport_booking.service.SportComplexService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,6 +79,16 @@ public class SportComplexServiceImpl implements SportComplexService {
 
     @Override
     public SportComplexDTO insertSportComplex(SportComplexDTO sportComplexDTO) {
+
+        SportComplexDAO miDao = sportComplexMapper.toSportComplexDao(sportComplexDTO);
+
+        if(miDao.getNumberAdreess() > 18) {
+            throw new IllegalArgumentException("El number no puede ser mayor a 18");
+        }
+
+        if (sportComplexRepository.exists(Example.of(miDao))) {
+            throw new DuplicateKeyException("Ya existe el sport complex con nombre" + sportComplexDTO.getNombreComplejo());
+        }
         sportComplexRepository.save(sportComplexMapper.toSportComplexDao(sportComplexDTO));
         return sportComplexDTO;
     }
